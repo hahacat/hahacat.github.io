@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/bass.css" >
+<title>无标题文档</title>
+<style>
+	  body{height:100%; background:url(img1/bj11.jpg) no-repeat; background-size:cover; }
+	  .wrapper{/*background:url(img1/ever1.jpg) no-repeat ; background-size:100% 72px;*/}
+	   /*header部分*/
+	  header{height:72px; position:relative; padding-bottom:80px;} 
+	  header h1{width:154px; height:72px; background:url(img/logo.png);}
+	  header ul{width:720px;}
+	  header li{width:120px; height:72px; line-height:72px; font:bold 24px/72px 'microsoft yahei'; text-align:center; float:left; transition:1s all ease; cursor:pointer;}
+	  header a{color:blue; }
+	  header .cur a{color:green; font-weight:bold;}
+	  header li:hover{transform:scale(1.5);}
+	  /*nav*/
+	  nav{width:700px; height:530px; position:relative; margin:0 auto;}
+	  nav .click{width:100%;  margin:0 auto; font:20px/30px '楷体';}
+	  nav div{width:700px; height:500px;position:relative;background:url(img1/img2.jpg);margin:0 auto; }
+	  nav div span{position:absolute; background:url(img1/img1.jpg);}
+	  nav .p1{position:absolute; left:0; bottom:0; width:100%; height:50px; text-align:center; color:#fff; font:30px/50px '楷体'; background:rgba(0,0,0,0.5);}
+	  /*content*/
+	  .content h2{text-align:center;height:50px; font:bold 30px/50px 'microsoft yahei'; padding:20px 0; color:brown;}
+	  .content p{text-indent:2em; font:24px/40px '宋体'; color:yellow;}
+</style>
+<script src="javascripts/comon.js"></script>
+<script>
+	document.addEventListener('DOMContentLoaded',function(){
+		var oNav=document.getElementsByTagName('nav')[0];
+		var oP1=oNav.children[0];
+		var oDiv=oNav.children[1];
+		var oP=oNav.children[2];
+		var C=7; 
+		var R=5; 
+		var iNow=1;
+		var arr=['做井场的时候还是花红柳绿','生产时却已天野苍茫','我们经历了河水暴涨的雨季','也经历了冬季的大雪纷飞','环境的恶劣依然没有影响我们完成任务','这就是我的兄弟们，勤劳善良的人们']
+		/*oP.innerHTML=arr[iNow%6-1];*/
+		for(var j=0; j<R; j++){
+			for(var i=0; i<C; i++){
+				var oS=document.createElement('span');
+				oS.style.width=oDiv.offsetWidth/C+'px'; 
+				oS.style.height=oDiv.offsetHeight/R+'px';
+				oS.style.top=j*+oDiv.offsetHeight/R+'px';
+				oS.style.left=i*oDiv.offsetWidth/C+'px';
+				oDiv.appendChild(oS);
+				oS.style.backgroundPosition=-oS.offsetLeft+'px '+-oS.offsetTop+'px';
+			}
+		}
+		var bOk=true; 
+		oP1.addEventListener('click',function(){
+			if(bOk==false){return; }
+			bOk=false;
+			iNow++;
+			var aS=oDiv.children;
+			for(var i=0; i<aS.length; i++){
+				var x=aS[i].offsetLeft+aS[i].offsetWidth/2-oDiv.offsetWidth/2;
+				var y=aS[i].offsetTop+aS[i].offsetHeight/2-oDiv.offsetHeight/2;
+				aS[i].style.transform='translateX('+x+'px) translateY('+y+'px) rotateX('+rnd(-180,180)+'deg) rotateY('+rnd(-180,180)+'deg) ';
+				aS[i].style.opacity=0;
+				oP.style.opacity=0;
+				oP.style.transition='1s all ease';
+				aS[i].style.transition='1s all ease';
+			}
+			aS[0].addEventListener('transitionend',function(){
+				for(var i=0; i<aS.length; i++){
+					aS[i].style.transform='translateX(0px) translateY(0px) rotateX(0deg) rotateY(0deg)';
+					aS[i].style.opacity=1;
+					oP.innerHTML=arr[(iNow-1)%6];
+					oP.style.opacity=1;
+					aS[i].style.transition='none';
+					oP.style.transition='none';
+					aS[i].style.backgroundImage='url("img1/img'+(iNow%6)+'.jpg")';
+					oDiv.style.backgroundImage='url("img1/img'+((iNow+1)%6)+'.jpg")';
+					bOk=true;
+				}
+			},false);
+		},false);
+	},false);
+</script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="w clearfix">
+            <h1 class="fl"></h1>
+            <ul class="fr clearfix">
+                <li class="fl"><a href="index.html">返回首页</a></li>
+                <li class="fl cur"><a href="javascript:;">曾经</a></li>
+                <li class="fl"><a href="javascript:;">爱自然</a></li>
+                <li class="fl"><a href="javascript:;">爱生活</a></li>
+                <li class="fl"><a href="javascript:;">爱动物</a></li>
+                <li class="fl"><a href="javascript:;">随笔</a></li>
+            </ul>
+        </header>
+        <nav>
+        	<p class="click">下一张</p>
+        	<div></div>
+            <p class="p1">做井场的时候还是花红柳绿</p>
+        </nav>
+        <div class="w content">
+        	<h2>致最亲爱的兄弟们！</h2>
+           	<p>我曾在钻井公司工作过许多年，我在做第一个项目的时候曾经和他们一起生活了几个月，所以我能深刻的了解那群人，无论寒暑，无论风雨，他们都默默坚守在工作岗位上，奉献着青春与汗水。那是一群怎样的人啊，他们勤劳，朴实，善良，从不因环境的恶劣而报怨。我想写一个关于反应钻井工人真实生活的网页，而不是像一些官网那样华而不实的页面，我仍在努力着,最后祝愿所有的钻井工作者永远年轻。</p>
+        </div>
+    </div>
+</body>
+</html>
