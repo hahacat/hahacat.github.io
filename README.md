@@ -1,1 +1,0 @@
-# smallgreedycat.github.io
